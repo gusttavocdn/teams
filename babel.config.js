@@ -3,19 +3,19 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      'module-resolver',
-      {
-        root: ['./src'],
-        alias: {
-          '@assets': './src/assets',
-          '@components': './src/components',
-          '@routes': './src/routes',
-          '@screens': './src/screens',
-          '@store': './src/storage',
-          '@theme': './src/theme',
-          '@utils': './src/utils',
+      [
+        'module-resolver',
+        {
+          root: ['./src'],
+          alias: {
+            '@assets': './src/assets',
+            '@components': './src/components',
+            '@screens': './src/screens',
+            '@storage': './src/storage',
+            '@utils': './src/utils',
+          },
         },
-      },
+      ],
     ],
   };
 };
