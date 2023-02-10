@@ -1,7 +1,8 @@
 # Teams
 
-![cover](./docs/cover.jpeg)
-![gif](./docs/gif.gif)
+<img src="./docs/cover.jpeg" width="300px">
+
+<img src="./docs/gif.gif" width="300px">
 
 ## :page_with_curl: About/Sobre
 
