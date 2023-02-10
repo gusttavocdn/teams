@@ -17,7 +17,7 @@ type RouteParams = {
 
 export function Players() {
   const [team, setTeam] = useState('Time A');
-  const [players, setPlayers] = useState<string[]>(['Gustavo']);
+  const [players, setPlayers] = useState<string[]>([]);
 
   const { params } = useRoute() as { params: RouteParams };
 
