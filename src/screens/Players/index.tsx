@@ -6,7 +6,8 @@ import { Highlight } from '@components/Highlight';
 import { Input } from '@components/Input';
 import { ListEmpty } from '@components/ListEmpty';
 import { PlayerCard } from '@components/PlayerCard';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { groupRemoveByName } from '@storage/group/groupRemoveByName';
 import { playerAddByGroup } from '@storage/players/playerAddByGroup';
 import { playerRemoveByGroup } from '@storage/players/playerRemoveByGroup';
 import { playersGetByGroupAndTeam } from '@storage/players/playersGetByGroupAndTeam';
@@ -26,7 +27,7 @@ export function Players() {
   const [player, setPlayer] = useState('');
 
   const { params } = useRoute() as { params: RouteParams };
-
+  const { navigate } = useNavigation();
   const newPlayerNameInputRef = useRef<TextInput>();
 
   const handleAddPlayer = async () => {
@@ -73,6 +74,29 @@ export function Players() {
       console.log(error);
       Alert.alert('Pessoas', 'Não foi possivel carregar as pessoas');
     }
+  };
+
+  const groupRemove = async () => {
+    try {
+      await groupRemoveByName(params.group);
+      navigate('groups');
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Remover grupo', 'Não foi possivel remover o grupo');
+    }
+  };
+
+  const handleGroupRemove = async () => {
+    Alert.alert('Remover grupo', 'Deseja remover o grupo?', [
+      {
+        text: 'Não',
+        style: 'cancel',
+      },
+      {
+        text: 'Sim',
+        onPress: async () => groupRemove(),
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -137,7 +161,11 @@ export function Players() {
         ]}
       />
 
-      <Button title='Remover Turma' type='SECONDARY' />
+      <Button
+        title='Remover Turma'
+        type='SECONDARY'
+        onPress={handleGroupRemove}
+      />
     </Container>
   );
 }
